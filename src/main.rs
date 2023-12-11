@@ -21,7 +21,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
                     address.as_str(),
                     etherscan_key
                 ).await?;
-                println!("{:#?}", txns);
+                // println!("{:#?}", txns);
+                cli_parser::display_table::display_table(txns);
             } else {
                 let balance =
                     etherscan::account::get_account_balance(address.as_str(), etherscan_key)

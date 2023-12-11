@@ -1,5 +1,5 @@
 use reqwest;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use web3_unit_converter::Unit;
 use serde_json;
 
@@ -12,25 +12,26 @@ struct Account {
     result: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AccTxn {
     #[serde(rename = "blockNumber")]
-    block_number: String,
+    pub block_number: String,
 
     #[serde(rename = "timeStamp")]
-    time_stamp: String,
+    pub time_stamp: String,
 
     hash: String,
     nonce: String,
-    // #[serde(rename = "blockHash")]
-    // block_hash: String,
+
+    #[serde(rename = "blockHash")]
+    block_hash: String,
 
     #[serde(rename = "transactionIndex")]
     transaction_index: String,
 
-    from: String,
-    to: String,
-    value: String,
+    pub from: String,
+    pub to: String,
+    pub value: String,
     gas: String,
     #[serde(rename = "gasPrice")]
     gas_price: String,
@@ -57,11 +58,10 @@ pub struct AccTxn {
     function_name: String,
 }
 
-#[derive(Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct AccountTxns {
     message: String,
-    result: Vec<AccTxn>, // AccTxn,
-    // result: Vec<AccTxn>, // AccTxn,
+    result: Vec<AccTxn>,
 }
 
 pub async fn get_account_balance(
@@ -80,13 +80,11 @@ pub async fn get_account_balance(
 
     let apikey = format!("&apikey={}", etherscan_key.as_str());
     let url = url + apikey.as_str();
-    // println!("{:#?}", url);
 
     let body = reqwest::get(url).await?
         .text().await?;
 
     let dbody: Account = serde_json::from_str(&body)?;
-    // println!("{:#?}", dbody);
 
     if dbody.message == "NOTOK" {
         let err = dbody.result;
