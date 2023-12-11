@@ -10,19 +10,27 @@ use cli_parser::clap_opts::CargoCli;
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     dotenv().ok();
 
-    let etherscan_key = std::env::var("ETHERSCAN_KEY")
-        .expect("ETHERSCAN_KEY must be set.");
+    let etherscan_key = std::env::var("ETHERSCAN_KEY").expect("ETHERSCAN_KEY must be set.");
 
-    let CargoCli::Balance(args) = CargoCli::parse();
+    let CargoCli::Account(args) = CargoCli::parse();
 
     if let Some(address) = args.account {
-        let balance = etherscan::account::get_account_balance(
-            address.as_str(),
-            etherscan_key
-        ).await?;
+        if let Some(action) = args.action {
+            if action == "txns" {
+                let txns = etherscan::account::get_account_txns(
+                    address.as_str(),
+                    etherscan_key
+                ).await?;
+                println!("{:#?}", txns);
+            } else {
+                let balance =
+                    etherscan::account::get_account_balance(address.as_str(), etherscan_key)
+                        .await?;
 
-        println!("Account: {}", address);
-        println!("Balance: {}", balance);
+                println!("Account: {}", address);
+                println!("Balance: {}", balance);
+            }
+        }
     } else {
         println!("No Account provided!!");
     }

@@ -5,12 +5,15 @@ use clap::{arg, command};
 #[command(name = "cargo")]
 #[command(bin_name = "cargo")]
 pub enum CargoCli {
-    Balance(BalanceArgs),
+    Account(AccountArgs),
 }
 
 #[derive(clap::Args)]
 #[command(author, version, about, long_about = None)]
-pub struct BalanceArgs {
+pub struct AccountArgs {
     #[arg(long)]
     pub account: Option<String>,
+
+    #[arg(long)]
+    pub action: Option<String>,
 }
