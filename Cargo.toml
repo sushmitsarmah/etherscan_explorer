@@ -1,7 +1,9 @@
 [package]
-name = "cmd_line_tools"
-version = "0.1.0"
+name = "etherscan_explorer_cmd_line"
+version = "0.0.1"
 edition = "2021"
+authors = ["Sushmit"]
+license = "MIT"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

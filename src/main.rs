@@ -1,7 +1,7 @@
 use dotenv::dotenv;
 
 // import lib functions
-use cmd_line_tools::init_fn;
+use etherscan_explorer_cmd_line::init_fn;
 
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {

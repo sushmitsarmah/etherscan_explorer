@@ -213,21 +213,6 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "702fc72eb24e5a1e48ce58027a675bc24edd52096d5397d4aea7c6dd9eca0bd1"
 
 [[package]]
-name = "cmd_line_tools"
-version = "0.1.0"
-dependencies = [
- "clap",
- "crossterm",
- "dotenv",
- "prettytable-rs",
- "reqwest",
- "serde",
- "serde_json",
- "tokio",
- "web3-unit-converter",
-]
-
-[[package]]
 name = "colorchoice"
 version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -380,6 +365,21 @@ dependencies = [
  "fixed-hash",
  "primitive-types",
  "uint",
+]
+
+[[package]]
+name = "etherscan_explorer_cmd_line"
+version = "0.0.1"
+dependencies = [
+ "clap",
+ "crossterm",
+ "dotenv",
+ "prettytable-rs",
+ "reqwest",
+ "serde",
+ "serde_json",
+ "tokio",
+ "web3-unit-converter",
 ]
 
 [[package]]
