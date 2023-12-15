@@ -4,6 +4,8 @@ version = "0.0.1"
 edition = "2021"
 authors = ["Sushmit"]
 license = "MIT"
+description = "Command Line Etherscan Explorer"
+repository = "https://github.com/sushmitsarmah/etherscan_explorer"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
